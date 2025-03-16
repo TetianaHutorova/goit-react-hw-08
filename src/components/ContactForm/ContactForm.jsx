@@ -5,7 +5,7 @@ import css from "./ContactForm.module.css";
 
 export default function ContactForm({ addNewUser }) {
   const handleSubmit = (values, actions) => {
-    addNewUser(values);
+    addNewUser({...values,id:nanoid()});
     actions.resetForm();
   };
   const UserSchema = Yup.object().shape({
@@ -21,8 +21,7 @@ export default function ContactForm({ addNewUser }) {
   return (
     <Formik
       initialValues={{
-        id: nanoid(),
-        name: "",
+         name: "",
         number: "",
       }}
       validationSchema={UserSchema}
