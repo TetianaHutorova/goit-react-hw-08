@@ -17,15 +17,15 @@ export default function App() {
     ];
   });
 
-  const [filter, setFilter] = useState(contacts);
+  const [filter, setFilter] = useState("");
 
-  const handlerFilter = (value) =>
-    setFilter(
-      contacts.filter(({ name }) => name.toLowerCase().includes(value))
-    );
+  const handlerFilter = (value) => setFilter(value.toLowerCase());
+
+  const getFilteredContacts = () =>
+    contacts.filter(({ name }) => name.toLowerCase().includes(filter));
 
   const addNewUser = (newUser) => {
-    setFilter([...filter, newUser]), setContacts([...contacts, newUser]);
+    setContacts((prevContacts) => [...prevContacts, newUser]);
   };
 
   const deleteUser = (id) => {
@@ -44,7 +44,7 @@ export default function App() {
       <h1>Phonebook</h1>
       <ContactForm addNewUser={addNewUser} />
       <SearchBox handlerFilter={handlerFilter} />
-      <ContactList contacts={contacts} deleteUser={deleteUser} />
+      <ContactList contacts={getFilteredContacts()} deleteUser={deleteUser} />
     </div>
   );
 }
