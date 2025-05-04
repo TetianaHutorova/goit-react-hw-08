@@ -1,6 +1,10 @@
 import css from "./SearchBox.module.css";
-export default function SearchBox({ handlerFilter }) {
-  const handlerInput = (evt) => handlerFilter(evt.target.value.toLowerCase());
+import { useDispatch } from "react-redux";
+import { filterItems } from "../../redux/filterSlice";
+
+export default function SearchBox() {
+  const dispatch = useDispatch();
+  const handlerInput = (evt) => dispatch(filterItems(evt.target.value));
   return (
     <div>
       <p>Find contacts by name</p>
