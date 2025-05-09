@@ -1,17 +1,17 @@
 import { Formik, Form, Field, ErrorMessage } from "formik";
 import * as Yup from "yup";
-import { nanoid } from "nanoid";
-import { addItem } from "../../redux/contactsSlice";
 import css from "./ContactForm.module.css";
 import { useDispatch } from "react-redux";
+import { addContact } from "../../redux/contactsOps";
 
 export default function ContactForm() {
   const dispatch = useDispatch();
 
   const handleSubmit = (values, actions) => {
-    dispatch(addItem({ ...values, id: nanoid() }));
+    dispatch(addContact(values));
     actions.resetForm();
   };
+
   const UserSchema = Yup.object().shape({
     name: Yup.string()
       .min(3, "Must be min 3 chars")

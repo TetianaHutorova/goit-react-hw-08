@@ -4,11 +4,14 @@ import { filterItems } from "../../redux/filterSlice";
 
 export default function SearchBox() {
   const dispatch = useDispatch();
-  const handlerInput = (evt) => dispatch(filterItems(evt.target.value));
   return (
     <div>
       <p>Find contacts by name</p>
-      <input className={css.input} type="text" onChange={handlerInput} />
+      <input
+        className={css.input}
+        type="text"
+        onChange={(evt) => dispatch(filterItems(evt.target.value))}
+      />
     </div>
   );
 }

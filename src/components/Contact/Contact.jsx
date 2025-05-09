@@ -1,7 +1,11 @@
 import { AiFillPhone, AiOutlineUser } from "react-icons/ai";
-import css from "./Contact.module.css"
-export default function Contact({ contact, id, deleteUser }) {
-  const handlerClick = (id) => deleteUser(id);
+import css from "./Contact.module.css";
+import { deleteContact } from "../../redux/contactsOps";
+import { useDispatch } from "react-redux";
+
+export default function Contact({ contact, id }) {
+  const dispatch = useDispatch();
+ 
   return (
     <div className={css.contact}>
       <div>
@@ -14,7 +18,9 @@ export default function Contact({ contact, id, deleteUser }) {
           {contact.number}
         </p>
       </div>
-      <button className={css.btn} onClick={() => handlerClick(id)}>Delete</button>
+      <button className={css.btn} onClick={() => dispatch(deleteContact(id))}>
+        Delete
+      </button>
     </div>
   );
 }
