@@ -3,7 +3,6 @@ const initialState = {
   name: "",
 };
 
-export const selectFilter = (state) => state.filter.name;
 
 const slice = createSlice({
   name: "filter",
