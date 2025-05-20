@@ -6,7 +6,7 @@ export default function SearchBox() {
   const dispatch = useDispatch();
   return (
     <div>
-      <p>Find contacts by name</p>
+      <p>Find contacts</p>
       <input
         className={css.input}
         type="text"

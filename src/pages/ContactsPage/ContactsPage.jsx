@@ -6,14 +6,14 @@ import { useEffect } from "react";
 import { fetchContacts } from "../../redux/contacts/operations";
 import {
   selectContacts,
-  // selectError,
-  // selectLoading,
+  selectError,
+  selectLoading,
 } from "../../redux/contacts/selectors";
 
 export default function ContactsPage() {
   const selectorItems = useSelector(selectContacts);
-//   const isLoading = useSelector(selectLoading);
-//   const isError = useSelector(selectError);
+  const isLoading = useSelector(selectLoading);
+  const isError = useSelector(selectError);
 
   const dispatch = useDispatch();
   useEffect(() => {
@@ -25,8 +25,8 @@ export default function ContactsPage() {
       <ContactForm />
       {selectorItems.length > 0 && <SearchBox />}
       {selectorItems.length > 0 && <ContactList />}
-      {/* {isLoading && <p>Please wait. Data is being loaded.</p>}
-      {isError && <p>An error occurred. Please try again.</p>} */}
+      {isLoading && <p>Please wait. Data is being loaded.</p>}
+      {isError && <p>An error occurred. Please try again.</p>}
     </>
   );
 }
