@@ -8,11 +8,17 @@ import { addContact } from "../../redux/contacts/operations";
 export default function ContactForm() {
   const dispatch = useDispatch();
   const handleSubmit = (values, actions) => {
-    dispatch(addContact(values));
-    toast.success("Contact successfully added!");
+     dispatch(addContact(values));
+    toast("Contact successfully added!", {
+      style: {
+         borderRadius: "10px",
+        background: "#333",
+        color: "#fff",
+      },
+    });
     actions.resetForm();
   };
-
+ 
   const UserSchema = Yup.object().shape({
     name: Yup.string()
       .min(3, "Must be min 3 chars")

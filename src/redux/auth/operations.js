@@ -1,8 +1,6 @@
 import { createAsyncThunk } from "@reduxjs/toolkit";
 import axios from "axios";
 
-// refreshUser - оновлення користувача за токеном. Базовий тип екшену "auth/refresh". Використовується у компоненті App під час його монтування.
-
 export const goitAPI = axios.create({
   baseURL: "https://connections-api.goit.global",
 });
@@ -30,7 +28,7 @@ export const register = createAsyncThunk(
 export const login = createAsyncThunk("auth/login", async (body, thunkApi) => {
   try {
     const resp = await goitAPI.post("/users/login", body);
-     setAuthHeader(resp.data.token);
+    setAuthHeader(resp.data.token);
     return resp.data;
   } catch (error) {
     return thunkApi.rejectWithValue(error.message);
@@ -46,3 +44,20 @@ export const logout = createAsyncThunk("auth/logout", async (_, thunkApi) => {
     return thunkApi.rejectWithValue(error.message);
   }
 });
+
+export const refreshUser = createAsyncThunk(
+  "auth/refresh",
+  async (_, thunkApi) => {
+    try {
+      const savedToken = thunkApi.getState().auth.token;
+      if (!savedToken) {
+        return thunkApi.rejectWithValue("Token is not exist");
+      }
+      setAuthHeader(savedToken);
+      const resp = await goitAPI.get("/users/current");
+      return resp.data;
+    } catch (error) {
+      return thunkApi.rejectWithValue(error.message);
+    }
+  }
+);

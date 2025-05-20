@@ -1,5 +1,5 @@
 import { AiFillPhone, AiOutlineUser } from "react-icons/ai";
-import toast, { Toaster } from "react-hot-toast";
+import toast from "react-hot-toast";
 import css from "./Contact.module.css";
 import { deleteContact } from "../../redux/contacts/operations";
 import { useDispatch } from "react-redux";
@@ -22,13 +22,18 @@ export default function Contact({ contact, id }) {
       <button
         className={css.btn}
         onClick={() => {
-          dispatch(deleteContact(id)),
-            toast.success("Contact successfully deleted!");
+          dispatch(deleteContact(id));
+             toast("Contact successfully deleted!", {
+               style: {
+                borderRadius: "10px",
+                background: "#333",
+                color: "#fff",
+              },
+            });
         }}
       >
         Delete
       </button>
-      <Toaster />
     </div>
   );
 }

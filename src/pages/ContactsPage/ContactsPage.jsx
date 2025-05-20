@@ -6,8 +6,8 @@ import { useEffect } from "react";
 import { fetchContacts } from "../../redux/contacts/operations";
 import {
   selectContacts,
-//   selectError,
-//   selectLoading,
+  // selectError,
+  // selectLoading,
 } from "../../redux/contacts/selectors";
 
 export default function ContactsPage() {
